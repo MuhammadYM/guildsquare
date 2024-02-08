@@ -5,6 +5,7 @@ import Link from "next/link";
 import NavItems from "./NavItems";
 import { buttonVariants } from "./ui/button";
 import { Span } from "next/dist/trace";
+import Cart from "./Cart";
 
 function NavBar() {
   const user = null;
@@ -59,7 +60,9 @@ function NavBar() {
                       />
                     </div>
                   )}
-                  <div className="ml-4 flow-root lg:ml-6"></div>
+                  <div className="ml-4 flow-root lg:ml-6">
+                    <Cart />
+                  </div>
                 </div>
               </div>
             </div>
