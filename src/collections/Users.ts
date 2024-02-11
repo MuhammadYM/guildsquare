@@ -2,7 +2,18 @@ import { CollectionConfig } from "payload/types";
 
 export const Users: CollectionConfig = {
   slug: "users",
-  auth: true,
+  auth: {
+    verify: {
+      //token used to verify email
+      generateEmailHTML: ({ token }) => {
+        return `
+      <div>
+        <p>Hello please verify</p>
+      </div>
+      `;
+      },
+    },
+  },
   //access policy provided by our cms ensure that only the right people can see the right data in their admin
   access: {
     //anyone is able to read all the users and create a user
