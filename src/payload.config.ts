@@ -4,14 +4,20 @@ import { mongooseAdapter } from "@payloadcms/db-mongodb";
 import { slateEditor } from "@payloadcms/richtext-slate";
 import path from "path";
 import dotenv from "dotenv";
+import { Users } from "./collections/Users";
+
+dotenv.config({
+  path: path.resolve(__dirname, "../.env"),
+});
 
 export default buildConfig({
   serverURL: process.env.NEXT_PUBLIC_SERVER_URL || "",
-  collections: [], // Add your collections here
+  collections: [Users], // Add your collections here
   routes: {
     admin: "/sell",
   },
   admin: {
+    user: "users",
     bundler: webpackBundler(),
     meta: {
       titleSuffix: "- GuildSquare",
