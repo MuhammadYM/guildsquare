@@ -30,7 +30,12 @@ export const authRouter = router({
       //collection is nothing more than a table in our cms
       await payload.create({
         collection: "users",
-        data: {},
+        data: {
+          email,
+          password,
+          role: "user",
+        },
       });
+      return { success: true, sentToEmail: email };
     }),
 });
