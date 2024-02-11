@@ -6,11 +6,7 @@ export const Users: CollectionConfig = {
     verify: {
       //token used to verify email
       generateEmailHTML: ({ token }) => {
-        return `
-      <div>
-        <p>Hello please verify</p>
-      </div>
-      `;
+        return `<a href=${process.env.NEXT_PUBLIC_SERVER_URL}/verify-email?token=${token}>Verify account</a>`;
       },
     },
   },
