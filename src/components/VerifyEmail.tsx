@@ -35,7 +35,7 @@ const VerifyEmail = ({ token }: VerifyEmailProps) => {
             src="/sent-email.png"
             alt="the email was sent"
             fill
-            className="animate-spin"
+            className="animate-spin -z-50"
           />
         </div>
         <h3 className="font-semibold text-2xl">You&apos;re all set!</h3>
