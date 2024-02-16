@@ -1,4 +1,4 @@
-import { PRODUCT_CATEGORY } from "@/config";
+import { PRODUCT_CATEGORY } from "../../config";
 import { CollectionConfig } from "payload/types";
 
 export const Products: CollectionConfig = {
@@ -44,6 +44,74 @@ export const Products: CollectionConfig = {
       type: "select",
       required: true,
       options: PRODUCT_CATEGORY.map(({ label, value }) => ({ label, value })),
+    },
+    // {
+    //   name: "product files",
+    //   label: "Product File(s)",
+    //   type: "relationship",
+    //   required: true,
+    //   relationTo: "product_files",
+    //   hasMany: false,
+    // },
+    {
+      name: "approvedForSale",
+      label: "Product Status",
+      type: "select",
+      access: {
+        create: ({ req }) => req.user.role === "admin",
+        read: ({ req }) => req.user.role === "admin",
+        update: ({ req }) => req.user.role === "admin",
+      },
+      defaultValue: "pending",
+      options: [
+        { label: "Pending verification", value: "pending" },
+        { label: "Approved for sale", value: "approved" },
+        { label: "Rejected", value: "rejected" },
+      ],
+    },
+    {
+      name: "priceId",
+      access: {
+        create: () => false,
+        read: () => false,
+        update: () => false,
+      },
+      type: "text",
+      admin: {
+        hidden: true,
+      },
+    },
+    {
+      name: "stripeId",
+      access: {
+        create: () => false,
+        read: () => false,
+        update: () => false,
+      },
+      type: "text",
+      admin: {
+        hidden: true,
+      },
+    },
+    {
+      name: "images",
+      label: "Product Images",
+      type: "array",
+      minRows: 1,
+      maxRows: 4,
+      required: true,
+      labels: {
+        singular: "Image",
+        plural: "Images",
+      },
+      fields: [
+        {
+          name: "image",
+          type: "upload",
+          relationTo: "media",
+          required: true,
+        },
+      ],
     },
   ],
 };
